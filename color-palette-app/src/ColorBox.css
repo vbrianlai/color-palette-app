@@ -13,7 +13,7 @@
 }
 
 .ColorBox.go-back {
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .copy-button, .back-button {
@@ -54,6 +54,14 @@
     color: black;
     letter-spacing: 1px;
     text-transform: uppercase;
+}
+
+.light-text {
+    color: white;
+}
+
+.ColorBox .dark-text {
+    color: black;
 }
 
 .see-more {

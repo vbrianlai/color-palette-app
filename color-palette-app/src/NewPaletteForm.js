@@ -5,7 +5,7 @@ import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
+// import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
@@ -28,6 +28,10 @@ const styles = (theme) => ({
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      height: '64px'
     },
     appBarShift: {
       width: `calc(100% - ${drawerWidth}px)`,
@@ -53,14 +57,14 @@ const styles = (theme) => ({
     drawerHeader: {
       display: 'flex',
       alignItems: 'center',
-      padding: theme.spacing(0, 1),
+      padding: 'theme.spacing(0, 1)',
       // necessary for content to be below app bar
       ...theme.mixins.toolbar,
       justifyContent: 'flex-end',
     },
     content: {
       flexGrow: 1,
-      height: 'calc(100vh - 64px)',
+      height: `calc(100vh - 64px)`,
       padding: theme.spacing(3),
       transition: theme.transitions.create('margin', {
         easing: theme.transitions.easing.sharp,
@@ -148,9 +152,15 @@ class NewPaletteForm extends Component {
         this.props.savePalette(newPalette);
         this.props.history.push('/');
     }
+
+    deleteColor(colorName) {
+        this.setState({
+            colors: this.state.colors.filter(color => color.name !== colorName)
+        })
+    }
     
     render() {
-        const { classes, theme } = this.props;
+        const { classes } = this.props;
         const { open, colors } = this.state;
     
         return (
@@ -243,7 +253,7 @@ class NewPaletteForm extends Component {
                     <div className={classes.drawerHeader} />
                     {/* stuff goes here */}
                     {colors.map(color => (
-                        <DraggableColorBox color={color.color} name={color.name}/>
+                        <DraggableColorBox color={color.color} name={color.name} handleDelete={() => this.deleteColor(color.name)} key={color.name}/>
                         ))
                     }
                 </main>

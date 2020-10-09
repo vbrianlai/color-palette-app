@@ -37,6 +37,7 @@ export default {
         display: 'inline-block',
         margin: '0 auto',
         position: 'relative',
-        marginBottom: '-3.8px'
+        // marginBottom: '-3.8px',
+        verticalAlign:'top',
     }
 }

@@ -7,6 +7,7 @@ export default {
     },
     colors: {
         height: '90%',
+        // width: '100%'
     },
     goBack: {
         width: '20%',

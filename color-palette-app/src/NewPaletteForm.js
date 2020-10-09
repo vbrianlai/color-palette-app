@@ -83,12 +83,14 @@ class NewPaletteForm extends Component {
         this.state = {
             open: false,
             currColor: 'teal',
-            nameInput: '',
             colors: [{color: 'blue', name: 'blue'}],
+            colorNameInput: '',
+            paletteNameInput: ''
         };
         this.updateCurrentColor = this.updateCurrentColor.bind(this);
         this.addNewColor = this.addNewColor.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
@@ -102,6 +104,12 @@ class NewPaletteForm extends Component {
             //for every color saved, check if its color is equal to the color we're trying to add
             this.state.colors.every(
                 ({color}) => color !== this.state.currColor
+            )
+        );
+        ValidatorForm.addValidationRule('isPaletteNameUnique', (value) => 
+            //for every color saved, check if its color is equal to the color we're trying to add
+            this.props.palettes.every(
+                ({paletteName}) => paletteName.toLowerCase() !== value.toLowerCase()
             )
         );
     }
@@ -119,12 +127,26 @@ class NewPaletteForm extends Component {
     }
 
     addNewColor() {
-        const newColor = {color: this.state.currColor, name: this.state.nameInput}
-        this.setState({colors: [...this.state.colors, newColor], nameInput: ''});
+        const newColor = {color: this.state.currColor, name: this.state.colorNameInput}
+        this.setState({colors: [...this.state.colors, newColor], colorNameInput: ''});
     }
 
     handleChange(e) {
-        this.setState({nameInput: e.target.value})
+        this.setState({
+            [e.target.name]: e.target.value
+            // colorNameInput: e.target.value
+        })
+    }
+
+    handleSubmit() {
+        let newName = this.state.paletteNameInput;
+        const newPalette = {
+            paletteName: newName,
+            id: newName.toLowerCase().replace(/ /g, '-'),
+            colors: this.state.colors
+        }
+        this.props.savePalette(newPalette);
+        this.props.history.push('/');
     }
     
     render() {
@@ -136,6 +158,7 @@ class NewPaletteForm extends Component {
                 <CssBaseline />
                 <AppBar
                     position="fixed"
+                    color='default'
                     className={clsx(classes.appBar, {
                         [classes.appBarShift]: open,
                     })}
@@ -152,6 +175,19 @@ class NewPaletteForm extends Component {
                         <Typography variant="h6" color="inherit" noWrap>
                             Persistent drawer
                         </Typography>
+                        <ValidatorForm onSubmit={this.handleSubmit}>
+                            <TextValidator 
+                                label='Palette Name'
+                                name='paletteNameInput'
+                                value={this.state.paletteNameInput}
+                                onChange={this.handleChange}
+                                validators={['required', 'isPaletteNameUnique']}
+                                errorMessages={['Enter Palette Name', 'Palette name is already taken']}
+                            />
+                            <Button variant='contained' color='primary' type='submit'>Save Palette</Button>
+                        </ValidatorForm>
+
+                        
                     </Toolbar>
                 </AppBar>
                 <Drawer
@@ -180,10 +216,11 @@ class NewPaletteForm extends Component {
 
                     <ValidatorForm onSubmit={this.addNewColor}>
                         <TextValidator 
-                            value={this.state.nameInput} 
+                            value={this.state.colorNameInput} 
+                            name='colorNameInput'
                             onChange={this.handleChange}
                             validators={['required', 'isNameUnique', 'isColorUnique']}
-                            errorMessages={['This field is required', 'Color name is already taken', 'Color is alreacy being used']}
+                            errorMessages={['This field is required', 'Color name is already taken', 'Color is already being used']}
                         />
                         <Button 
                             variant='contained' 

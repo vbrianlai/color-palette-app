@@ -59,15 +59,20 @@ class PaletteFormNav extends Component {
         super(props);
         this.state = {
             colorNameInput: '',
-            formOpen: 'false'
+            formOpen: false
             // paletteNameInput: ''
         }
         // this.handleChange = this.handleChange.bind(this);
         this.showForm = this.showForm.bind(this);
+        this.hideForm = this.hideForm.bind(this);
     }
 
     showForm() {
         this.setState({formOpen: true})
+    }
+
+    hideForm() {
+        this.setState({formOpen: false})
     }
 
     // componentDidMount() {
@@ -122,7 +127,7 @@ class PaletteFormNav extends Component {
                         </Button>
                     </div>
                 </AppBar>
-                {this.state.formShowing && <PaletteMetaForm palettes={palettes} handleSubmit={handleSubmit}/>}
+                {this.state.formOpen && <PaletteMetaForm palettes={palettes} handleSubmit={handleSubmit} hideForm={this.hideForm}/>}
             </div>
         )
     }

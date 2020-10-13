@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+
+import {Picker} from 'emoji-mart';
+import 'emoji-mart/css/emoji-mart.css'
 
 class PaletteMetaForm extends Component {
     constructor(props) {
@@ -43,24 +45,26 @@ class PaletteMetaForm extends Component {
     };
 
     render() {
-        const {paletteNameInput} = this.state;
-        return (
+        const {paletteNameInput, open} = this.state;
+        const {hideForm, handleSubmit} = this.props;
+        return ( 
             <Dialog
-                open={this.state.open}
-                onClose={this.handleClose}
+                open={open}
+                onClose={hideForm}
                 aria-labelledby="form-dialog-title"
             >
                 <DialogTitle id="form-dialog-title">Save Palette</DialogTitle>
-                <ValidatorForm onSubmit={() => this.props.handleSubmit(paletteNameInput)}>
+                <ValidatorForm onSubmit={() => handleSubmit(paletteNameInput)}>
                 <DialogContent>
                     <DialogContentText>
                         Please choose a unique name for your palette! &#40;:
                     </DialogContentText>
+                    <Picker/>
                     
                     <TextValidator 
                         label='Palette Name'
                         name='paletteNameInput'
-                        value={this.state.paletteNameInput}
+                        value={paletteNameInput}
                         fullWidth
                         margin='normal'
                         onChange={this.handleChange}
@@ -70,7 +74,7 @@ class PaletteMetaForm extends Component {
                     
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={this.handleClose} color="primary">
+                    <Button onClick={hideForm} color="primary">
                         Cancel
                     </Button>
                     <Button variant='contained' color='primary' type='submit'>Save Palette</Button>

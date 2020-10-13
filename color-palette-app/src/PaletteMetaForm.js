@@ -60,8 +60,8 @@ class PaletteMetaForm extends Component {
     }
 
     render() {
-        const {paletteNameInput, open} = this.state;
-        const {hideForm, handleSubmit} = this.props;
+        const {paletteNameInput} = this.state;
+        const {hideForm} = this.props;
         return ( 
             <div>
                 <Dialog

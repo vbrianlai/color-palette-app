@@ -10,49 +10,9 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Button from '@material-ui/core/Button';
 
-import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import { Link } from 'react-router-dom';
 
-const drawerWidth = 400;
-
-const styles = (theme) => ({
-    root: {
-        display: 'flex'
-    },
-    appBar: {
-        transition: theme.transitions.create(['margin', 'width'], {
-          easing: theme.transitions.easing.sharp,
-          duration: theme.transitions.duration.leavingScreen,
-        }),
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        height: '64px'
-      },
-      appBarShift: {
-        width: `calc(100% - ${drawerWidth}px)`,
-        marginLeft: drawerWidth,
-        transition: theme.transitions.create(['margin', 'width'], {
-          easing: theme.transitions.easing.easeOut,
-          duration: theme.transitions.duration.enteringScreen,
-        }),
-      },
-      menuButton: {
-        marginRight: theme.spacing(2),
-      },
-      navBtns: {
-        marginRight: '1rem',
-        '& a': {
-            textDecoration: 'none'
-        }
-      },
-      button: {
-          margin: '0 0.5rem',
-          '&:hover': {
-              cursor: 'pointer'
-            }
-      }
-});
+import styles from './styles/PaletteFormNavStyles';
 
 class PaletteFormNav extends Component {
     constructor(props) {
@@ -74,22 +34,6 @@ class PaletteFormNav extends Component {
     hideForm() {
         this.setState({formOpen: false})
     }
-
-    // componentDidMount() {
-    //     ValidatorForm.addValidationRule('isPaletteNameUnique', (value) => 
-    //         //for every color saved, check if its color is equal to the color we're trying to add
-    //         this.props.palettes.every(
-    //             ({paletteName}) => paletteName.toLowerCase() !== value.toLowerCase()
-    //         )
-    //     );
-    // }
-
-    // handleChange(e) {
-    //     this.setState({
-    //         [e.target.name]: e.target.value
-    //         // colorNameInput: e.target.value
-    //     })
-    // }
 
     render() {
         const {classes, open, handleSubmit, palettes} = this.props;

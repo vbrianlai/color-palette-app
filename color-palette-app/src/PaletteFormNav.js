@@ -8,6 +8,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import BrushIcon from '@material-ui/icons/Brush'
+import AddIcon from '@material-ui/icons/AddCircle'
 import Button from '@material-ui/core/Button';
 
 import { Link } from 'react-router-dom';
@@ -20,7 +22,6 @@ class PaletteFormNav extends Component {
         this.state = {
             colorNameInput: '',
             formOpen: false
-            // paletteNameInput: ''
         }
         // this.handleChange = this.handleChange.bind(this);
         this.showForm = this.showForm.bind(this);
@@ -55,7 +56,7 @@ class PaletteFormNav extends Component {
                         onClick={this.props.handleDrawerOpen}
                         className={clsx(classes.menuButton, open && classes.hide)}
                         >
-                            <MenuIcon />
+                            <AddIcon fontSize='large' />
                         </IconButton>
                         <Typography variant="h6" color="inherit" noWrap>
                             Create a Palette

@@ -12,6 +12,9 @@ export default {
         verticalAlign: 'top',
         '&:hover button': {
             opacity: 1
+        },
+        '@media (max-width: 1000px)': {
+            width: '100%'
         }
     },
     boxText: {

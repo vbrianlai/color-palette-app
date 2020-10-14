@@ -1,7 +1,7 @@
 export default {
     Palette: {
         height: '100vh',
-        overflowX: 'hidden',
+        // overflowX: 'hidden',
         display: 'flex',
         flexDirection: 'column',
     },

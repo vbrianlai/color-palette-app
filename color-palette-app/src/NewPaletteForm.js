@@ -120,6 +120,7 @@ class NewPaletteForm extends Component {
                     {/* stuff goes here */}
                     <DraggableColorList
                         colors={this.state.colors}
+                        distance={20}
                         deleteColor={this.deleteColor}
                         axis='xy'
                         onSortEnd={this.onSortEnd}

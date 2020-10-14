@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-// import chroma from 'chroma-js';
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import styles from './styles/ColorBoxStyles';
 import { withStyles } from '@material-ui/styles';

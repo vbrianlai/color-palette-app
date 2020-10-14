@@ -43,10 +43,10 @@ export default {
             boxShadow: 'none',
             width: '13px',
             height: '13px',
-            /* margin-left: 0px, */
+            // marginLeft: '-7px',
             marginTop: '-3px',
         },
-        [sizes.down('md')]: {
+        [sizes.down('sm')]: {
             width: '150px'
         }
     },

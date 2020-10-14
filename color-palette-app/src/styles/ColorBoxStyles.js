@@ -1,6 +1,7 @@
 
 import chroma from 'chroma-js';
 import sizes from './sizes';
+
 export default {
     ColorBox: {
         width: '20%',
@@ -9,7 +10,6 @@ export default {
         display: 'inline-block',
         position: 'relative',
         cursor: 'pointer',
-        // marginBottom: '-3.8px',
         verticalAlign: 'top',
         '&:hover button': {
             opacity: 1

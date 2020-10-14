@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import Button from '@material-ui/core/Button';
 import {ChromePicker} from 'react-color';
 import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
-
 import styles from './styles/ColorPickerFormStyles';
 
 class ColorPickerForm extends Component {
@@ -31,12 +30,6 @@ class ColorPickerForm extends Component {
                 ({color}) => color !== this.state.currColor
             )
         );
-        // ValidatorForm.addValidationRule('isPaletteNameUnique', (value) => 
-        //     //for every color saved, check if its color is equal to the color we're trying to add
-        //     this.props.palettes.every(
-        //         ({paletteName}) => paletteName.toLowerCase() !== value.toLowerCase()
-        //     )
-        // );
     }
 
     updateCurrentColor(newColor) {
@@ -46,7 +39,6 @@ class ColorPickerForm extends Component {
     handleChange(e) {
         this.setState({
             [e.target.name]: e.target.value
-            // colorNameInput: e.target.value
         })
     }
 
@@ -63,7 +55,7 @@ class ColorPickerForm extends Component {
             <div className={classes.root}>
                 <ChromePicker color={currColor} onChangeComplete={this.updateCurrentColor} className={classes.picker}/>
 
-                <ValidatorForm onSubmit={this.handleSubmit}>
+                <ValidatorForm onSubmit={this.handleSubmit} instantValidate={false}>
                     <TextValidator 
                         variant='filled'
                         margin='normal'

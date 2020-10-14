@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import styles from './styles/PaletteFooterStyles';
 import {withStyles} from '@material-ui/styles';
+import styles from './styles/PaletteFooterStyles';
 
 
 function PaletteFooter(props) {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import clsx from 'clsx';
-import { withStyles } from '@material-ui/core/styles';
+import arrayMove from 'array-move';
 import Drawer from '@material-ui/core/Drawer';
 import PaletteFormNav from './PaletteFormNav';
 import ColorPickerForm from './ColorPickerForm';
@@ -10,8 +10,8 @@ import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Button from '@material-ui/core/Button';
 import DraggableColorList from './DraggableColorList';
-import arrayMove from 'array-move';
-
+import seedColors from './seedColors';
+import { withStyles } from '@material-ui/core/styles';
 import styles from './styles/NewPaletteFormStyles';
 
 class NewPaletteForm extends Component {
@@ -22,7 +22,7 @@ class NewPaletteForm extends Component {
         super(props);
         this.state = {
             open: true,
-            colors: this.props.palettes[0].colors,
+            colors: seedColors[0].colors,
             paletteNameInput: ''
         };
         this.addNewColor = this.addNewColor.bind(this);
@@ -66,8 +66,15 @@ class NewPaletteForm extends Component {
     addRandomColor(){
         //pick random color from existing palettes
         const allColors = this.props.palettes.map(p => p.colors).flat();
-        let random = Math.floor(Math.random() * allColors.length);
-        const randomColor = allColors[random];
+        let random;
+        const randomColor;
+        let isDuplicateColor = true;
+        // make sure chosen random color is not already in the palette
+        while (isDuplicateColor) {
+            random = Math.floor(Math.random() * allColors.length);
+            randomColor = allColors[random];
+            isDuplicateColor = this.state.colors.some(color => color.name === randomColor.name);
+        }
         this.setState({colors: [...this.state.colors, randomColor]});
     }
 
@@ -117,9 +124,8 @@ class NewPaletteForm extends Component {
                     })}
                 >
                     <div className={classes.drawerHeader} />
-                    {/* stuff goes here */}
                     <DraggableColorList
-                        colors={this.state.colors}
+                        colors={colors}
                         distance={20}
                         deleteColor={this.deleteColor}
                         axis='xy'

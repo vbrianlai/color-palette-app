@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import ColorBox from "./ColorBox";
 import NavBar from './NavBar';
 import PaletteFooter from './PaletteFooter';
-import styles from './styles/PaletteStyles';
 import {withStyles} from '@material-ui/styles';
+import styles from './styles/PaletteStyles';
 
 class Palette extends Component {
     constructor(props) {
@@ -18,7 +18,6 @@ class Palette extends Component {
 
     changeLevel(level) {
         this.setState({ level: level });
-        // console.log(level);
     }
 
     changeFormat(val) {

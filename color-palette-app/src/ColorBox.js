@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import { CopyToClipboard } from 'react-copy-to-clipboard'
-import styles from './styles/ColorBoxStyles';
+import clsx from 'clsx'
 import { withStyles } from '@material-ui/styles';
+import styles from './styles/ColorBoxStyles';
 
 class ColorBox extends Component {
     constructor(props) {
@@ -26,9 +27,15 @@ class ColorBox extends Component {
                 <div style={{background}} className={classes.ColorBox}>
                     <div 
                         style={{background}} 
-                        className={`${classes.copyOverlay} ${copied && classes.showOverlay}`}
+                        className={clsx(classes.copyOverlay, {
+                            [classes.showOverlay]: copied
+                        })}
                     />
-                    <div className={`${classes.copyMessage} ${copied && classes.showCopyMessage}`}>
+                    <div 
+                        className={clsx(classes.copyMessage, {
+                            [classes.showCopyMessage]: copied
+                        })}
+                    >
                         <h1>copied!</h1>
                         <p className={classes.boxText}>
                             {background}
@@ -40,7 +47,6 @@ class ColorBox extends Component {
                         </div>
                         <button className={classes.copyButton}>Copy</button>
                     </div>
-                    {/* stopPropagation will stop the parent transition from firing when clicking on the button*/}
                     {showFullPalette && (
                         <Link to={`/palette/${paletteId}/${colorId}`} onClick={e => e.stopPropagation()}>    
                             <span className={classes.seeMore}>MORE</span>

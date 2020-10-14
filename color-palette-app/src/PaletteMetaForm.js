@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
+import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+import {Picker} from 'emoji-mart';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
-
-import {Picker} from 'emoji-mart';
 import 'emoji-mart/css/emoji-mart.css'
 
 class PaletteMetaForm extends Component {
@@ -34,7 +33,6 @@ class PaletteMetaForm extends Component {
     handleChange(e) {
         this.setState({
             [e.target.name]: e.target.value
-            // colorNameInput: e.target.value
         })
     }
 
@@ -61,12 +59,12 @@ class PaletteMetaForm extends Component {
     }
 
     render() {
-        const {paletteNameInput} = this.state;
+        const {paletteNameInput, stage} = this.state;
         const {hideForm} = this.props;
         return ( 
             <div>
                 <Dialog
-                    open={this.state.stage === 'emoji'}
+                    open={stage === 'emoji'}
                     onClose={hideForm}
                 >
                     <DialogTitle>Pick an emoji for your palette</DialogTitle>
@@ -76,7 +74,7 @@ class PaletteMetaForm extends Component {
                     />
                 </Dialog>
                 <Dialog
-                    open={this.state.stage === 'form'}
+                    open={stage === 'form'}
                     onClose={hideForm}
                     aria-labelledby="form-dialog-title"
                 >
@@ -97,7 +95,6 @@ class PaletteMetaForm extends Component {
                             validators={['required', 'isPaletteNameUnique']}
                             errorMessages={['Enter Palette Name', 'Palette name is already taken']}
                         />
-                        
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={hideForm} color="primary">
